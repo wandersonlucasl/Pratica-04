@@ -1,1 +1,36 @@
+
 {% extends 'base.html' %}
+
+{% block conteudo %}
+
+    <div>
+        <h1>Informações dos Alunos Cadastrados</h1>
+        <br>
+        <table border="1">
+            <tr>
+                <th>Nome</th>
+                <th>Curso</th>
+                <th>Turno</th>
+                <th>Editar</th>
+                <th>Excluir</th>
+            </tr>
+            {% for aluno in alunos %}
+            <tr>
+                <td>{{ aluno.nome }}</td>
+                <td>{{ aluno.curso }}</td>
+                <td>{{ aluno.turno }}</td>
+                <td><a href="{{ url_for('editar', id=aluno['id']) }}"> Editar </a></td>
+                <td>
+                    <form action="{{ url_for('excluir', id=aluno['id']) }}" method="post">
+                        <input type="submit" value="Excluir">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        <h2><a href="/cadastrar">Cadastrar Novo Aluno </a></h2>
+        <br>
+    </div>
+
+{% endblock %}
